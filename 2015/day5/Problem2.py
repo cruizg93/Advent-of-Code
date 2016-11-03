@@ -1,5 +1,4 @@
 # cook your dish here
-# cook your dish here
 #http://adventofcode.com/2015/day/5
 import sys
 import re
@@ -13,13 +12,12 @@ def checkDoubleCharTwice(line):
         if indexCount < len(characterArray):
             pair = character+characterArray[indexCount]
             auxline = line
-            line = line.replace(pair,"",1)
-            if pair in line[1:]:
-                return pair
+            if pair in line[(indexCount+1):]:
+                return True
             
         indexCount +=1
     
-    return "0"
+    return False
     
 def checkletterRepeated(line):
     characterArray = list(line)
@@ -27,17 +25,13 @@ def checkletterRepeated(line):
     for character in characterArray:
         if secondLetterAhead < len(characterArray):
             if character == characterArray[secondLetterAhead]:
-                print(character)
                 return True
         secondLetterAhead += 1       
     return False
     
 for line in sys.stdin.readlines():
     character = list(line)
-    pair = checkDoubleCharTwice(line)
-    if  not pair == "0":
-        line = line.replace(pair,"",2)
-        if checkletterRepeated(line):
-            print(pair,line)
+    
+    if  checkDoubleCharTwice(line) and checkletterRepeated(line):
             howManyNice += 1
 print(howManyNice)
