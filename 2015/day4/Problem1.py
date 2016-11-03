@@ -1,12 +1,12 @@
 #http://adventofcode.com/2015/day/4
 import hashlib
-word = input()
+key = input() #my given puzzle key bgvyzdsv
 
 for num in range(1000000):
-    digest = hashlib.md5((word + str(num)).encode())
+    digest = hashlib.md5((key + str(num)).encode())
     result = digest.hexdigest()
     if result[:5]=='00000':
-        print(word + str(num))
+        print(key + str(num))
         print(result)
         break
     
